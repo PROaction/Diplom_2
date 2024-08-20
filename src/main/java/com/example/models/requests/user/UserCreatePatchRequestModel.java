@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserCreateRequestModel {
+public class UserCreatePatchRequestModel {
     private String email;
     private String password;
     private String name;

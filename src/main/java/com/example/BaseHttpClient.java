@@ -66,6 +66,22 @@ public abstract class BaseHttpClient {
                 .thenReturn();
     }
 
+    protected Response doPatchRequest(String path, Object body, String token) {
+        return given().spec(baseRequestSpec())
+                .header("Authorization", token)
+                .body(body)
+                .patch(path)
+                .thenReturn();
+    }
+
+    protected Response doPatchRequest(String path, Map<String, Object> params, String token) {
+        return given().spec(baseRequestSpec())
+                .header("Authorization", token)
+                .params(params)
+                .patch(path)
+                .thenReturn();
+    }
+
     protected Response doDeleteRequest(String path, String token) {
         return given().spec(baseRequestSpec())
                 .header("Authorization", token)

@@ -1,6 +1,6 @@
 package com.example;
 
-import com.example.models.requests.user.UserCreateRequestModel;
+import com.example.models.requests.user.UserCreatePatchRequestModel;
 import com.example.models.requests.user.UserGetReuqestModel;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -10,7 +10,7 @@ public class UserApi extends BaseHttpClient {
 
     @Step("Создание пользователя")
     public Response createUser(String email, String password, String name) {
-        UserCreateRequestModel request = new UserCreateRequestModel(email, password, name);
+        UserCreatePatchRequestModel request = new UserCreatePatchRequestModel(email, password, name);
 
         return doPostRequest(apiPath + "/register", request);
     }
@@ -25,5 +25,12 @@ public class UserApi extends BaseHttpClient {
         UserGetReuqestModel request = new UserGetReuqestModel(email, password);
 
         return doPostRequest(apiPath + "/login", request);
+    }
+
+    @Step
+    public Response patchUser(String email, String password, String name, String token) {
+        UserCreatePatchRequestModel request = new UserCreatePatchRequestModel(email, password, name);
+
+        return doPatchRequest(apiPath + "/user", request, token);
     }
 }

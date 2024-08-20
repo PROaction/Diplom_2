@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.models.responses.ErrorResponseModel;
 import com.example.models.responses.UserGetCreateResponseModel;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -16,7 +17,6 @@ public class UserTest {
     public String email = "test.user@yandex.ru";
     private final String password = "123";
     public String userName = "proaction";
-    public String token = "";
 
     @Test
     public void testCreateUser() {
@@ -26,9 +26,6 @@ public class UserTest {
                 userName
         );
         assertEquals(200, response.statusCode());
-
-        UserGetCreateResponseModel user = response.then().extract().body().as(UserGetCreateResponseModel.class);
-        this.token = user.getAccessToken();
     }
 
     @Test
@@ -42,6 +39,36 @@ public class UserTest {
 
         Response responseSecondUser = userApi.createUser(email, password, userName);
         assertEquals(403, responseSecondUser.statusCode());
+    }
+
+    @Test
+    public void testLogin() {
+        Response responseCreateUser = userApi.createUser(
+                email,
+                password,
+                userName
+        );
+        assertEquals(200, responseCreateUser.statusCode());
+
+        Response responseGetUser = userApi.getUser(email, password);
+        assertEquals(200, responseGetUser.statusCode());
+    }
+
+    @Test
+    public void testLoginWithIncorrectData() {
+        Response responseCreateUser = userApi.createUser(
+                email,
+                password,
+                userName
+        );
+        assertEquals(200, responseCreateUser.statusCode());
+
+        Response responseGetUser = userApi.getUser("gfds@qwe.ru", "1");
+        assertEquals(401, responseGetUser.statusCode());
+
+        ErrorResponseModel error = responseGetUser.then().extract().body().as(ErrorResponseModel.class);
+        assertFalse(error.isSuccess());
+        assertEquals(error.getMessage(), "email or password are incorrect");
     }
 
     @ParameterizedTest

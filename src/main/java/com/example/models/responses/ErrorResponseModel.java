@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class ErrorResponseModel {
-    private String success;
+    private boolean success;
     private String message;
 }

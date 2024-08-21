@@ -27,7 +27,7 @@ public class UserApi extends BaseHttpClient {
         return doPostRequest(apiPath + "/login", request);
     }
 
-    @Step
+    @Step("Изменение данных пользователя")
     public Response patchUser(String email, String password, String name, String token) {
         UserCreatePatchRequestModel request = new UserCreatePatchRequestModel(email, password, name);
 

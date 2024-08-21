@@ -9,7 +9,7 @@ import java.util.List;
 public class OrderApi extends BaseHttpClient {
     private String apiPath = "/api/orders";
 
-    @Step("Создание заказа с авмторизацией")
+    @Step("Создание заказа с авторизацией")
     public Response createOrder(List<String> ingredients, String token) {
         OrderCreateRequestModel request = new OrderCreateRequestModel(ingredients);
 

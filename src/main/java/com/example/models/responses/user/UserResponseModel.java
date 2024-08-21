@@ -1,4 +1,4 @@
-package com.example.models.responses;
+package com.example.models.responses.user;
 
 
 import lombok.AllArgsConstructor;

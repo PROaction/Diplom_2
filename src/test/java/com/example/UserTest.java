@@ -1,10 +1,9 @@
 package com.example;
 
-import com.example.models.requests.user.UserCreatePatchRequestModel;
 import com.example.models.responses.ErrorResponseModel;
-import com.example.models.responses.UserGetCreateResponseModel;
-import com.example.models.responses.UserPatchResponseModel;
-import com.example.models.responses.UserResponseModel;
+import com.example.models.responses.user.UserGetCreateResponseModel;
+import com.example.models.responses.user.UserPatchResponseModel;
+import com.example.models.responses.user.UserResponseModel;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
